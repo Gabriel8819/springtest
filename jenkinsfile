@@ -16,7 +16,7 @@ pipeline{
 	}
 	post{
 		always{
-			sh "docker image rm webapp-docker" 
+			sh 'docker image rm webapp-docker' 
 		}            
 	}
 
