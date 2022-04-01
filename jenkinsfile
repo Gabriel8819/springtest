@@ -6,8 +6,7 @@ pipeline{
 			
 			
 				
-			   	sh 'mvn -version' 
-			   	sh 'sleep 3600'
+			   	sh 'mvn clean verify' 
 			   
 			}
 
