@@ -23,7 +23,7 @@ class SpringDocker1ApplicationTests {
 	@Test
 	void shouldResultTestResult() throws Exception {
 		this.mockMvc.perform(get("/home"))
-			.andExpect(status().is(404))
+			.andExpect(status().is(200))
 			.andExpect(content().string(containsString("test resul")));
 	}
 
