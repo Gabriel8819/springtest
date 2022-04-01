@@ -13,8 +13,7 @@ pipeline{
 			
 				
 			   	sh 'mvn clean verify' 
-			   	sh 'java -jar target/app.jar'
-			   	sh 'sleep 3600'
+			   	
 			   
 			}
 
@@ -23,9 +22,9 @@ pipeline{
 		
 		
 		stage("clean docker images"){
-		                
-			sh "docker image rm webapp-docker" 
-		                 
+			steps{
+				sh "docker image rm webapp-docker" 
+			}            
 		}
 
 
