@@ -1,34 +1,16 @@
 pipeline{
-	agent any
-	
-	environment {
-	
-		DOCKER_MYSQL_ARGS="""--network=skynet -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_PASSWORD=123456 
-		-e MYSQL_DATABASE=spring -e MYSQL_USER=gabriel -p 3307:3306"""
-		DOCKER_SPRING_ARGS="""--network=skynet """
-	   
-	    
-	}
-
-	
-	stages {
-		stage("Build docker"){
+	agent none
+	stages{
+		stage('build mvn'){
+    		agent{ dockerfile true }
 			steps {
-				script{
-				    docker.image("mysql:latest").withRun('${DOCKER_MYSQL_ARGS}'){C -> 
-				       
-				       sh "until mysqladmin ping -h 0.0.0.0 -uroot -p123456 --port=3307; do sleep 1; done"
-				       def appImage = docker.build("docker-webapp")
-				       docker.image("docker-webapp").withRun('${DOCKER_SPRING_ARGS}'){c ->
-								
-				       }
-				    
-				   } 
-				}
-
+			   
+			   sh 'mvn -version' 
 			}
-		
+
+    
 		}
+	   
 	}
 
 }
