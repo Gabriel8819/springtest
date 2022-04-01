@@ -17,7 +17,7 @@ pipeline{
 				script{
 				    docker.image("mysql:latest").withRun('${DOCKER_MYSQL_ARGS}'){C -> 
 				       
-				       sh "until mysqladmin ping -h 0.0.0.0 -uroot -p123456 --port3307; do sleep 1; done"
+				       sh "until mysqladmin ping -h 0.0.0.0 -uroot -p123456 --port=3307; do sleep 1; done"
 				       
 				       
 				       
