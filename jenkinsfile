@@ -18,45 +18,19 @@ pipeline{
 				    docker.image("mysql:latest").withRun('${DOCKER_MYSQL_ARGS}'){C -> 
 				       
 				       sh "until mysqladmin ping -h 0.0.0.0 -uroot -p123456 --port=3307; do sleep 1; done"
-				       
-				       
-				       
-				       
 				       def appImage = docker.build("docker-webapp")
-				       appImage.inside('${DOCKER_SPRING_ARGS}'){
-				          
-				          
-				          sh "sleep 3600" 
+				       docker.image("docker-webapp").withRun('${DOCKER_SPRING_ARGS}'){c ->
+								appImage.inside{
+							          sh "sleep 3600" 
+				       			}
 				       }
-
-
-				       
-				       
-				       
-				       
-				        
-				    }
-
 				    
-				    
-				    
-				    
-				    
-				    
+				   } 
 				}
 
 			}
 		
 		}
-		
-		
-		
-	
-	
-	
-	
-	
-	
 	}
 
 }
