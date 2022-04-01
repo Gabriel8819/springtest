@@ -2,6 +2,7 @@ pipeline{
 	agent{ 
 		dockerfile{
     		args "-p 8080:8080"
+    		name "webapp-docker"
 		}
 
 	}
