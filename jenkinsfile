@@ -1,7 +1,6 @@
 pipeline{
 	agent{ 
 		dockerfile{
-    		args "-p 8080:8080"
     		additionalBuildArgs '-t webapp-docker'
 		}
 
@@ -21,8 +20,8 @@ pipeline{
 		}
 		
 		
-		stage("clean docker images"){
-			steps{
+		post{
+			always{
 				sh "docker image rm webapp-docker" 
 			}            
 		}
