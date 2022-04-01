@@ -20,6 +20,15 @@ pipeline{
 
     
 		}
+		
+		
+		stage("clean docker images"){
+		                
+			sh "docker image rm webapp-docker" 
+		                 
+		}
+
+
 	   
 	}
 
