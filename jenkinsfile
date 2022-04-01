@@ -1,6 +1,8 @@
 pipeline{
 	agent{ 
-		dockerfile true
+		dockerfile{
+    		args "-p 8080:8080"
+		}
 
 	}
 	stages{
@@ -10,6 +12,7 @@ pipeline{
 			
 				
 			   	sh 'mvn clean verify' 
+			   	
 			   	sh 'sleep 3600'
 			   
 			}
