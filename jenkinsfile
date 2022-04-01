@@ -20,9 +20,7 @@ pipeline{
 				       sh "until mysqladmin ping -h 0.0.0.0 -uroot -p123456 --port=3307; do sleep 1; done"
 				       def appImage = docker.build("docker-webapp")
 				       docker.image("docker-webapp").withRun('${DOCKER_SPRING_ARGS}'){c ->
-								appImage.inside{
-							          sh "sleep 3600" 
-				       			}
+								
 				       }
 				    
 				   } 
