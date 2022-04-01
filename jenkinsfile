@@ -23,7 +23,12 @@ pipeline{
 				       
 				       
 				       def appImage = docker.build("docker-webapp")
-				       appImage.inside('${DOCKER_SPRING_ARGS}')
+				       appImage.inside('${DOCKER_SPRING_ARGS}'){
+				          
+				          
+				          sh "sleep 3600" 
+				       }
+
 
 				       
 				       
