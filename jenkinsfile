@@ -1,11 +1,14 @@
 pipeline{
-	agent none
+	agent{ dockerfile true }
 	stages{
 		stage('build mvn'){
-    		agent{ dockerfile true }
 			steps {
+			
+			
+				
+			   	sh 'mvn -version' 
 			   
-			   sh 'mvn -version' 
+			   
 			}
 
     
