@@ -1,8 +1,6 @@
 pipeline{
 	agent{ 
-		dockerfile{
-    		additionalBuildArgs '-t webapp-docker'
-		}
+		dockerfile true
 
 	}
 	stages{
@@ -16,7 +14,7 @@ pipeline{
 	}
 	post{
 		always{
-			sh 'docker image rm webapp-docker' 
+			sh 'docker system prune' 
 		}            
 	}
 
