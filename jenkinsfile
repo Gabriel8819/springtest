@@ -9,25 +9,15 @@ pipeline{
 		stage('build mvn'){
 			steps {
 			
-			
-				
 			   	sh 'mvn clean verify' 
-			   	
-			   
 			}
 
-    
 		}
-		
-		
-		post{
-			always{
-				sh "docker image rm webapp-docker" 
-			}            
-		}
-
-
-	   
+	}
+	post{
+		always{
+			sh "docker image rm webapp-docker" 
+		}            
 	}
 
 }
