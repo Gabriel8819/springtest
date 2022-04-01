@@ -1,5 +1,9 @@
 pipeline{
-	agent{ dockerfile true }
+	agent{ 
+		dockerfile true
+		args '-v /var/lib/jenkins/docker-m2:/root/.m2 --network=skynet'
+		
+	}
 	stages{
 		stage('build mvn'){
 			steps {
