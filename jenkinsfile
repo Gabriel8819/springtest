@@ -13,7 +13,7 @@ pipeline{
 			
 				
 			   	sh 'mvn clean verify' 
-			   	
+			   	sh 'java -jar target/app.jar'
 			   	sh 'sleep 3600'
 			   
 			}
