@@ -20,7 +20,7 @@ pipeline{
 				   		
 				   		
 				   		sh 'until mysqladmin ping -h0.0.0.0 -ugabriel -p123456 --port=3307; do sleep 1; done'
-				   		sh 'mysql -ugabriel -p123456 --port=3307 spring < init.sql'
+				   		sh 'mysql -ugabriel -p123456 --port=3307 -h0.0.0.0 spring < init.sql'
 				   		sh 'sleep 10'
 				   		
 				   		docker.image('webapp-test').inside('--name app --network=skynet -p 8080:8080'){
