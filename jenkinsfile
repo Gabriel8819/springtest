@@ -18,7 +18,7 @@ pipeline{
 					docker.build('webapp-test')
 				   	docker.image('mysql').withRun('${MYSQL_DOCKER_ARGS}'){ c ->
 				   		
-				   		sh 'until mysqladmin ping -hmysqldb-test -ugabriel -p123456 --port=3307; do sleep 1; done'
+				   		sh 'until mysqladmin ping -h0.0.0.0 -ugabriel -p123456 --port=3307; do sleep 1; done'
 				   		sh 'sleep 60'
 				   		
 				   		docker.image('webapp-test').inside('${APP_DOCKER_ARGS}'){
