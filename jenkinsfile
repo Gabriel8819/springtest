@@ -1,5 +1,6 @@
 pipeline{
 	agent any
+	
 	stages{
 		stage('build mvn'){
 			agent{ 
@@ -8,15 +9,29 @@ pipeline{
 				}
 			}
 			steps {
-			
-			   	sh 'mvn clean verify' 
+			   	sh 'mvn clean verify'
+			   	sh "sleep 60"
+			   	
+			   	
 			   
 			}
 
 		}
+		stage("second"){
+			agent{
+				docker{
+				    image "mysql"
+				    args "-e MYSQL_ROOT_PASSWORD=123456"
+				}
+			}
+		    steps{
+		        sh "sleep 3600"
+		       
+		    }
+		}
+
 	}
 	post{
-		
 		always{
 			sh 'docker system prune -f' 
 		}            
