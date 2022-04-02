@@ -1,40 +1,31 @@
 pipeline{
 	agent any
 	
+	environment{
+	    MYSQL_DOCKER_ARGS="""--name mysqldb-test --network=skynet -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_USER=gabriel 
+	    -e MYSQL_PASSWORD=123456 -e MYSQL_DATABASE=spring """
+	    APP_DOCKER_ARGS=""" """
+	}
+
+	
 	stages{
 		stage('build mvn'){
-			agent{ 
-				dockerfile {
-				   args "-v /var/lib/jenkins/docker-m2:/root/.m2"
-				}
-			}
 			steps {
-			   	sh 'mvn clean verify'
-			   	sh "sleep 60"
-			   	
-			   	
+				sh 'docker network create skynet'
+			
+			   	docker.image("mysql").withRun('${MYSQL_DOCKER_ARGS}'){ c ->
+			   		
+			   		sh 'until mysqladmin ping -hmysqldb-test -ugabriel -p123456; do sleep 1; done'
+			   		
+			   		sh 'sleep 3600';
+			   	    
+			   	}
 			   
 			}
 
 		}
-		stage("second"){
-			agent{
-				docker{
-				    image "mysql"
-				    args "-e MYSQL_ROOT_PASSWORD=123456"
-				}
-			}
-		    steps{
-		        sh "sleep 3600"
-		       
-		    }
-		}
 
 	}
-	post{
-		always{
-			sh 'docker system prune -f' 
-		}            
-	}
+	
 
 }
