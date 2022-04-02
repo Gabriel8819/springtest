@@ -11,7 +11,7 @@ pipeline{
 	stages{
 		stage('build mvn'){
 			steps {
-				//sh 'docker network create skynet'
+				sh 'docker network create skynet'
 			
 				script{
 				// execute sql file
@@ -22,12 +22,7 @@ pipeline{
 				   		sh 'sleep 10'
 				   		
 				   		docker.image('webapp-test').inside('--name app --network=skynet -p 8080:8080'){
-				   		
-				   		
-				   		
 				   			sh "mvn clean verify"
-				   			
-				   		    
 				   		}
 				   	}
 				}
@@ -35,6 +30,13 @@ pipeline{
 			}
 
 		}
+		post {
+			always{
+			    sh 'docker system prune -f'
+			    
+			}
+		}
+
 
 	}
 	
