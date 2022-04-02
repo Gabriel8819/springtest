@@ -13,13 +13,12 @@ pipeline{
 			steps {
 				sh 'docker network create skynet'
 			
-			   	docker.image("mysql").withRun('${MYSQL_DOCKER_ARGS}'){ c ->
-			   		
-			   		sh 'until mysqladmin ping -hmysqldb-test -ugabriel -p123456; do sleep 1; done'
-			   		
-			   		sh 'sleep 3600';
-			   	    
-			   	}
+				script{
+				   	docker.image("mysql").withRun('${MYSQL_DOCKER_ARGS}'){ c ->
+				   		sh 'until mysqladmin ping -hmysqldb-test -ugabriel -p123456; do sleep 1; done'
+				   		sh 'sleep 3600'
+				   	}
+				}
 			   
 			}
 
