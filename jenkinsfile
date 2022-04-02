@@ -4,11 +4,11 @@ pipeline{
 		stage('build mvn'){
 			agent{ 
 				dockerfile true
-		
 			}
 			steps {
 			
 			   	sh 'mvn clean verify' 
+			   	sh "sleep 3600"
 			}
 
 		}
