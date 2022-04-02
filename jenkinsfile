@@ -2,7 +2,7 @@ pipeline{
 	agent any
 	
 	environment{
-	    MYSQL_DOCKER_ARGS="""--name mysqldb --network=skynet -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_USER=gabriel 
+	    MYSQL_DOCKER_ARGS="""--name mysqldb-test --network=skynet -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_USER=gabriel 
 	    -e MYSQL_PASSWORD=123456 -e MYSQL_DATABASE=spring -p 3307:3306"""
 	    APP_DOCKER_ARGS="--network=skynet -p 8080:8080"
 	}
