@@ -4,14 +4,14 @@ pipeline{
 	environment{
 	    MYSQL_DOCKER_ARGS="""--name mysqldb-test --network=skynet -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_USER=gabriel 
 	    -e MYSQL_PASSWORD=123456 -e MYSQL_DATABASE=spring -p 3307:3306"""
-	    APP_DOCKER_ARGS="""--network=skynet"""
+	    APP_DOCKER_ARGS="""--network=skynet -p 8080:8080"""
 	}
 
 	
 	stages{
 		stage('build mvn'){
 			steps {
-				sh 'docker network create skynet'
+				//sh 'docker network create skynet'
 			
 				script{
 				// execute sql file
@@ -19,7 +19,7 @@ pipeline{
 				   	docker.image('mysql').withRun('${MYSQL_DOCKER_ARGS}'){ c ->
 				   		
 				   		sh 'until mysqladmin ping -h0.0.0.0 -ugabriel -p123456 --port=3307; do sleep 1; done'
-				   		sh 'sleep 60'
+				   		sh 'sleep 10'
 				   		
 				   		docker.image('webapp-test').inside('${APP_DOCKER_ARGS}'){
 				   		
