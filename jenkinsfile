@@ -21,7 +21,7 @@ pipeline{
 				   		sh 'until mysqladmin ping -h0.0.0.0 -ugabriel -p123456 --port=3307; do sleep 1; done'
 				   		sh 'sleep 10'
 				   		
-				   		docker.image('webapp-test').inside('${APP_DOCKER_ARGS}'){
+				   		docker.image('webapp-test').inside('--network=skynet -p 8080:8080'){
 				   		
 				   		
 				   		
